@@ -33,9 +33,10 @@ public class ProductController {
     public ProductDto save(
             @PathVariable long id,
             @RequestParam String name,
-            @RequestParam int price
+            @RequestParam int price,
+            @RequestParam int qty
     ) {
-        return manager.save(new ProductDto(id, name, price));
+        return manager.save(new ProductDto(id, name, price, qty));
     }
 
     @RequestMapping("/{id}/remove")

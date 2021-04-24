@@ -21,14 +21,15 @@ public class ProductManager {
                 Connection conn = dataSource.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(
-                        "SELECT id, name, price FROM products ORDER BY id LIMIT 50");
+                        "SELECT id, name, price, qty FROM products ORDER BY id LIMIT 50");
         ) {
             List<ProductDto> items = new ArrayList<>();
             while (rs.next()) {
                 items.add(new ProductDto(
                         rs.getLong("id"),
                         rs.getString("name"),
-                        rs.getInt("price")
+                        rs.getInt("price"),
+                        rs.getInt("qty")
                 ));
 
             }
@@ -42,7 +43,7 @@ public class ProductManager {
         try (
                 Connection conn = dataSource.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(
-                        "SELECT id, name, price FROM products WHERE id = ?");
+                        "SELECT id, name, price, qty FROM products WHERE id = ?");
         ) {
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -51,7 +52,8 @@ public class ProductManager {
                 return new ProductDto(
                         rs.getLong("id"),
                         rs.getString("name"),
-                        rs.getInt("price")
+                        rs.getInt("price"),
+                        rs.getInt("qty")
                 );
             }
             throw new NotFoundException();
@@ -66,13 +68,14 @@ public class ProductManager {
             try (
                     Connection conn = dataSource.getConnection();
                     PreparedStatement stmt = conn.prepareStatement(
-                            "INSERT INTO products(name, price) VALUES (?, ?)",
+                            "INSERT INTO products(name, price, qty) VALUES (?, ?, ?)",
                             Statement.RETURN_GENERATED_KEYS
                     );
             ) {
                 int index = 0;
                 stmt.setString(++index, item.getName());
                 stmt.setInt(++index, item.getPrice());
+                stmt.setInt(++index, item.getQty());
                 stmt.execute();
 
                 try (ResultSet keys = stmt.getGeneratedKeys();) {
