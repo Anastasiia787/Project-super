@@ -2,10 +2,7 @@ package tech.itpark.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.itpark.manager.ProductManager;
 import tech.itpark.dto.ProductDto;
 
@@ -19,28 +16,33 @@ public class ProductController {
     private final ProductManager manager;
 
 
-    @RequestMapping
+    @GetMapping
     public List<ProductDto> getAll() {
         return manager.getAll();
     }
 
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ProductDto getById(@PathVariable long id) {
         return manager.getById(id);
     }
 
-    @RequestMapping("/{id}/save")
-    public ProductDto save(
-            @PathVariable long id,
-            @RequestParam String name,
-            @RequestParam int price,
-            @RequestParam int qty
-    ) {
-        return manager.save(new ProductDto(id, name, price, qty));
+    @GetMapping("/search")
+    public List<ProductDto> search(@RequestParam String name) {
+        return manager.search(name);
+   }
+
+    @PostMapping()
+    public ProductDto save(@RequestBody ProductDto dto) {
+        return manager.save(dto);
+    }
+    @PutMapping("/{id}")
+    public ProductDto update(@RequestBody ProductDto dto) {
+        return manager.update(dto);
     }
 
-    @RequestMapping("/{id}/remove")
-    public ProductDto removeById(@PathVariable long id) {
-        return manager.removeById(id);
+    @DeleteMapping("/{id}")
+    public boolean removeById(@PathVariable long id) {
+        manager.removeById(id);
+        return true;
     }
 }

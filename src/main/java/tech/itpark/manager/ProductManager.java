@@ -1,127 +1,111 @@
 package tech.itpark.manager;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
-import tech.itpark.exception.DataAccessException;
-import tech.itpark.exception.NotFoundException;
 import tech.itpark.dto.ProductDto;
+import tech.itpark.mapper.ProductRowMapper;
 
-import javax.sql.DataSource;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+/**
+ * Product manager.
+ */
 @Component
 @RequiredArgsConstructor
 public class ProductManager {
-    private final DataSource dataSource;
+    private final NamedParameterJdbcTemplate template;
+    private final ProductRowMapper rowMapper = new ProductRowMapper();
 
+    /**
+     * Return all products.
+     *
+     * @return products
+     */
     public List<ProductDto> getAll() {
-        try (
-                Connection conn = dataSource.getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(
-                        "SELECT id, name, price, qty FROM products ORDER BY id LIMIT 50");
-        ) {
-            List<ProductDto> items = new ArrayList<>();
-            while (rs.next()) {
-                items.add(new ProductDto(
-                        rs.getLong("id"),
-                        rs.getString("name"),
-                        rs.getInt("price"),
-                        rs.getInt("qty")
-                ));
-
-            }
-            return items;
-        } catch (SQLException e) {
-            throw new DataAccessException(e);
-        }
+        return template.query(
+                "SELECT id, name, price, quantity, deleted FROM products ORDER BY id",
+                rowMapper
+        );
     }
 
+    /**
+     * Return product by Id.
+     *
+     * @param id product id
+     * @return product
+     */
     public ProductDto getById(long id) {
-        try (
-                Connection conn = dataSource.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(
-                        "SELECT id, name, price, qty FROM products WHERE id = ?");
-        ) {
-            stmt.setLong(1, id);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return new ProductDto(
-                        rs.getLong("id"),
-                        rs.getString("name"),
-                        rs.getInt("price"),
-                        rs.getInt("qty")
-                );
-            }
-            throw new NotFoundException();
-        } catch (SQLException e) {
-            throw new DataAccessException(e);
-        }
+        return template.queryForObject(
+                "SELECT id, name, price, quantity, deleted FROM products WHERE id = :id",
+                Map.of("id", id),
+                rowMapper
+        );
     }
 
-
-    public ProductDto save(ProductDto item) {
-        if (item.getId() == 0) {
-            try (
-                    Connection conn = dataSource.getConnection();
-                    PreparedStatement stmt = conn.prepareStatement(
-                            "INSERT INTO products(name, price, qty) VALUES (?, ?, ?)",
-                            Statement.RETURN_GENERATED_KEYS
-                    );
-            ) {
-                int index = 0;
-                stmt.setString(++index, item.getName());
-                stmt.setInt(++index, item.getPrice());
-                stmt.setInt(++index, item.getQty());
-                stmt.execute();
-
-                try (ResultSet keys = stmt.getGeneratedKeys();) {
-                    if (keys.next()) {
-                        long id = keys.getLong(1);
-                        return getById(1);
-                    }
-                    throw new DataAccessException("No keys generated");
-                }
-
-            } catch (SQLException e) {
-                throw new DataAccessException(e);
-            }
-        }
-
-        try (
-                Connection conn = dataSource.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(
-                        "UPDATE products SET name = ?, price = ? WHERE id = ?");
-        ) {
-            int index = 0;
-            stmt.setString(++index, item.getName());
-            stmt.setInt(++index, item.getPrice());
-            stmt.setLong(++index, item.getId());
-            stmt.execute();
-
-            return getById(item.getId());
-
-        } catch (SQLException e) {
-            throw new DataAccessException(e);
-        }
+    /**
+     * Save product.
+     *
+     * @param dto product
+     * @return product
+     */
+    public ProductDto save(ProductDto dto) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        template.update(
+                "INSERT INTO products(name, price, quantity) VALUES (:name, :price, :quantity)",
+                new MapSqlParameterSource(Map.of(
+                        "name", dto.getName(),
+                        "price", dto.getPrice(),
+                        "quantity", dto.getQuantity()
+                )),
+                keyHolder
+        );
+        return dto;
     }
 
-    public ProductDto removeById(long id) {
-        ProductDto item = getById(id);
+    /**
+     * Update product.
+     *
+     * @param dto product
+     * @return product
+     */
+    public ProductDto update(ProductDto dto) {
+        template.update(
+                "UPDATE products SET name = :name, price = :price, quantity = :quantity WHERE id = :id",
+                Map.of(
+                        "id", dto.getId(),
+                        "name", dto.getName(),
+                        "price", dto.getPrice(),
+                        "quantity", dto.getQuantity()
+                )
+        );
+        return getById(dto.getId());
+    }
 
-        try (
-                Connection conn = dataSource.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(
-                        "DELETE FROM products WHERE id = ?");
-        ) {
-            stmt.setLong(1, id);
-            stmt.execute();
-        } catch (SQLException e) {
-            throw new DataAccessException(e);
-        }
-        return item;
+    public List<ProductDto> search(String name) {
+        return template.query(
+                "SELECT id, name, price, quantity, deleted FROM products WHERE name = :name",
+                Map.of("name", name),
+                rowMapper
+        );
+    }
+
+    /**
+     * Delete product by id.
+     *
+     * @param id product id
+     * @return deleting success
+     */
+    public boolean removeById(long id) {
+        ProductDto dto = getById(id);
+        template.update(
+                "UPDATE products SET deleted = true WHERE id = :id",
+                Map.of("id", dto.getId())
+        );
+        return true;
     }
 }

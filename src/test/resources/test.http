@@ -1,20 +1,45 @@
-http://localhost:8080/products
+GET http://localhost:8080/products
 
 ###
 
-http://localhost:8080/products/1
+GET http://localhost:8080/products/1
 
 ###
 
-http://localhost:8080/products/0/save?name=forth&price=1500
+GET http://localhost:8080/products/search?name=first
 
 ###
 
-http://localhost:8080/products/1/save?name=forth&price=600
+GET http://localhost:8080/products/search?name=book
 
 ###
 
-http://localhost:8080/products/2/remove
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "some item",
+  "price": 3000,
+  "quantity": 5,
+  "deleted": false
+}
+
+###
+
+PUT http://localhost:8080/products/1
+Content-Type: application/json
+
+{
+  "id": "1",
+  "name": "book",
+  "price": 2000,
+  "quantity": 7,
+  "deleted": false
+}
+
+###
+
+DELETE http://localhost:8080/products/2
 
 
 
