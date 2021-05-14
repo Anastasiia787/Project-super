@@ -12,20 +12,12 @@ import tech.itpark.mapper.ProductRowMapper;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Product manager.
- */
 @Component
 @RequiredArgsConstructor
 public class ProductManager {
     private final NamedParameterJdbcTemplate template;
     private final ProductRowMapper rowMapper = new ProductRowMapper();
 
-    /**
-     * Return all products.
-     *
-     * @return products
-     */
     public List<ProductDto> getAll() {
         return template.query(
                 "SELECT id, name, price, quantity, deleted FROM products ORDER BY id",
@@ -33,12 +25,6 @@ public class ProductManager {
         );
     }
 
-    /**
-     * Return product by Id.
-     *
-     * @param id product id
-     * @return product
-     */
     public ProductDto getById(long id) {
         return template.queryForObject(
                 "SELECT id, name, price, quantity, deleted FROM products WHERE id = :id",
@@ -47,12 +33,6 @@ public class ProductManager {
         );
     }
 
-    /**
-     * Save product.
-     *
-     * @param dto product
-     * @return product
-     */
     public ProductDto save(ProductDto dto) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(
@@ -67,12 +47,6 @@ public class ProductManager {
         return dto;
     }
 
-    /**
-     * Update product.
-     *
-     * @param dto product
-     * @return product
-     */
     public ProductDto update(ProductDto dto) {
         template.update(
                 "UPDATE products SET name = :name, price = :price, quantity = :quantity WHERE id = :id",
@@ -94,12 +68,6 @@ public class ProductManager {
         );
     }
 
-    /**
-     * Delete product by id.
-     *
-     * @param id product id
-     * @return deleting success
-     */
     public boolean removeById(long id) {
         ProductDto dto = getById(id);
         template.update(
