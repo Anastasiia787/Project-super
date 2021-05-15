@@ -41,6 +41,45 @@ Content-Type: application/json
 
 DELETE http://localhost:8080/products/2
 
+###
+
+GET http://localhost:8080/buyers
+
+###
+
+GET http://localhost:8080/buyers/1
+
+###
+
+GET http://localhost:8080/buyers/4
+
+###
+
+POST http://localhost:8080/buyers
+Content-Type: application/json
+
+{
+  "buyerName": "o",
+  "genderPerson": "w",
+  "year": 35,
+  "phoneNumber": "89376767034"
+}
+
+###
+
+PUT http://localhost:8080/buyers/1
+
+{
+  "buyerId": 1,
+  "buyerName": "t",
+  "genderPerson": "m",
+  "year": 35,
+  "phoneNumber": "89376780035"
+}
+
+
+
+
 
 
 
