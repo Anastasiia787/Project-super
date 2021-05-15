@@ -15,7 +15,7 @@ public class BuyerRowMapper implements RowMapper<BuyerDto> {
                 rs.getString("buyer_name"),
                 rs.getString("gender_person"),
                 rs.getInt("year"),
-                rs.getLong("phone_number")
+                rs.getString("phone_number")
         );
     }
 }

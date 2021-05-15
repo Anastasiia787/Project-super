@@ -13,7 +13,7 @@ CREATE TABLE buyers
     buyer_name    TEXT    NOT NULL,
     gender_person TEXT    NOT NULL,
     year          INTEGER NOT NULL,
-    phone_number  LONG NOT NULL
+    phone_number  TEXT NOT NULL
 );
 
 

@@ -13,5 +13,5 @@ public class BuyerDto {
     private String buyerName;
     private String genderPerson;
     private int year;
-    private long phoneNumber;
+    private String phoneNumber;
 }

@@ -4,9 +4,9 @@ VALUES (1, 'first', 300, 10),
        (3, 'third', 500, 12);
 
 INSERT INTO buyers (buyer_id, buyer_name, gender_person, year, phone_number)
-VALUES (1, 't', 'm', 30, 89376780034),
-       (2, 'g', 'w', 18, 89396783450),
-       (3, 'j', 'w', 50, 89175650304);
+VALUES (1, 't', 'm', 30, '89376780034'),
+       (2, 'g', 'w', 18, '89396783450'),
+       (3, 'j', 'w', 50, '89175650304');
 
 INSERT INTO buys (buyer_id, product_id, name, price, quantity)
 VALUES (1, 1, 'first', 300, 1),
