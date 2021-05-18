@@ -6,11 +6,11 @@ GET http://localhost:8080/products/1
 
 ###
 
-GET http://localhost:8080/products/search?name=first
+GET http://localhost:8080/products/search?model=first
 
 ###
 
-GET http://localhost:8080/products/search?name=book
+GET http://localhost:8080/products/search?model=bicycle
 
 ###
 
@@ -18,7 +18,7 @@ POST http://localhost:8080/products
 Content-Type: application/json
 
 {
-  "name": "some item",
+  "model": "some item",
   "price": 3000,
   "quantity": 5,
   "deleted": false
@@ -31,7 +31,7 @@ Content-Type: application/json
 
 {
   "id": "1",
-  "name": "book",
+  "model": "bicycle",
   "price": 2000,
   "quantity": 7,
   "deleted": false
@@ -67,11 +67,12 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/buyers/1
+PUT http://localhost:8080/buyers
+Content-Type: application/json
 
 {
   "buyerId": 1,
-  "buyerName": "t",
+  "buyerName": "updated",
   "genderPerson": "m",
   "year": 35,
   "phoneNumber": "89376780035"

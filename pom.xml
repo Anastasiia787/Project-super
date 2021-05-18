@@ -46,6 +46,7 @@ http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <artifactId>tika-core</artifactId>
             <version>1.26</version>
         </dependency>
+
     </dependencies>
 
     <build>

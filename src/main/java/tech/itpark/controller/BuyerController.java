@@ -10,12 +10,11 @@ import tech.itpark.manager.BuyerManager;
 @RequestMapping("/buyers")
 @RequiredArgsConstructor
 public class BuyerController {
-
     private final BuyerManager manager;
 
-    @GetMapping("/{buyerId}")
-    public BuyerDto getByBuyerId(@PathVariable long buyerId) {
-        return manager.getByBuyerId(buyerId);
+    @GetMapping("/{id}")
+    public BuyerDto getByBuyerId(@PathVariable long id) {
+        return manager.getByBuyerId(id);
     }
 
     @PostMapping()
@@ -23,9 +22,8 @@ public class BuyerController {
         return manager.save(dto);
     }
 
-    @PutMapping("/{buyerId}")
+    @PutMapping()
     public BuyerDto update(@RequestBody BuyerDto dto) {
         return manager.update(dto);
-
     }
 }

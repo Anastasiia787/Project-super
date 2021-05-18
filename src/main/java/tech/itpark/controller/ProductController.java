@@ -27,8 +27,8 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public List<ProductDto> search(@RequestParam String name) {
-        return manager.search(name);
+    public List<ProductDto> search(@RequestParam String model) {
+        return manager.search(model);
    }
 
     @PostMapping()

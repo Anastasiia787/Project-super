@@ -18,10 +18,10 @@ public class BuyerManager {
     private final NamedParameterJdbcTemplate template;
     private final BuyerRowMapper rowMapper = new BuyerRowMapper();
 
-    public BuyerDto getByBuyerId(long buyerId) {
+    public BuyerDto getByBuyerId(long id) {
         return template.queryForObject(
-                "SELECT buyer_id, buyer_name, gender_person, year, phone_number FROM buyers WHERE buyer_id = :buyer_id",
-                Map.of("buyer_id", buyerId),
+                "SELECT id, name, avatar, gender, age, phone_number FROM buyers WHERE id = :id",
+                Map.of("id", id),
                 rowMapper
         );
     }
@@ -29,13 +29,13 @@ public class BuyerManager {
     public BuyerDto save(BuyerDto dto) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(
-                "INSERT INTO buyers(buyer_name, gender_person, year, phone_number) VALUES (:buyer_name, :gender_person, :year, :phone_number)",
+                "INSERT INTO buyers(name, avatar, gender, age, phone_number) VALUES (:name, :avatar, :gender, :age, :phone_number)",
                 new MapSqlParameterSource(Map.of(
-                        "buyer_name", dto.getBuyerName(),
-                        "gender_person", dto.getGenderPerson(),
-                        "year", dto.getYear(),
+                        "name", dto.getName(),
+                        "avatar", dto.getAvatar(),
+                        "gender", dto.getGender(),
+                        "age", dto.getAge(),
                         "phone_number", dto.getPhoneNumber()
-
                 )),
                 keyHolder
         );
@@ -44,15 +44,16 @@ public class BuyerManager {
 
     public BuyerDto update(BuyerDto dto) {
         template.update(
-                "UPDATE buyers SET buyer_name = :buyer_name, year = :year, phone_number = :phone_number WHERE buyer_id = :buyer_id",
+                "UPDATE buyers SET name = :name, avatar = :avatar, age = :age, phone_number = :phone_number WHERE id = :id",
                 Map.of(
-                        "buyer_id", dto.getBuyerId(),
-                        "buyer_name", dto.getBuyerName(),
-                        "year", dto.getYear(),
+                        "id", dto.getId(),
+                        "name", dto.getName(),
+                        "avatar", dto.getAvatar(),
+                        "age", dto.getAge(),
                         "phone_number", dto.getPhoneNumber()
                 )
         );
-        return getByBuyerId(dto.getBuyerId());
+        return getByBuyerId(dto.getId());
     }
 
 }

@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class ProductDto {
     private long id;
-    private String name;
+    private String model;
+    private String brand;
+    private int wheelDiameter;
     private int price;
     private int quantity;
     private boolean deleted;

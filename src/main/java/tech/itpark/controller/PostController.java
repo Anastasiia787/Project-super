@@ -2,7 +2,7 @@ package tech.itpark.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import tech.itpark.dto.Post;
+import tech.itpark.dto.PostDto;
 import tech.itpark.manager.PostManager;
 
 import java.util.List;
@@ -14,12 +14,12 @@ public class PostController {
   private final PostManager manager;
 
   @GetMapping
-  public List<Post> getAll() {
+  public List<PostDto> getAll() {
     return manager.getAll();
   }
 
   @PostMapping
-  public void save(@RequestBody Post post) {
+  public void save(@RequestBody PostDto post) {
     manager.save(post);
   }
 }

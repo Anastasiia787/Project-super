@@ -3,8 +3,8 @@ package tech.itpark.manager;
 import org.apache.tika.Tika;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import tech.itpark.dto.Media;
-import tech.itpark.exception.MediaUploadException;
+import tech.itpark.dto.MediaDto;
+import tech.itpark.exception.MediaProductException;
 import tech.itpark.exception.UnsupportedContentTypeException;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class MediaManager {
         }
     }
 
-    public Media save(MultipartFile file) {
+    public MediaDto save(MultipartFile file) {
         try {
             String name = UUID.randomUUID().toString();
             String contentType = tika.detect(file.getInputStream());
@@ -40,9 +40,9 @@ public class MediaManager {
 
             String fullname = name + extension;
             file.transferTo(mediaPath.resolve(fullname));
-            return new Media(fullname);
+            return new MediaDto(fullname);
         } catch (IOException e) {
-            throw new MediaUploadException(e);
+            throw new MediaProductException(e);
         }
     }
 }

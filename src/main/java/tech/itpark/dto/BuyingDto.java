@@ -8,11 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class BuyerDto {
+public class BuyingDto {
     private long id;
-    private String name;
-    private String avatar = "noavatar.jpg";
-    private String gender;
-    private int age;
-    private String phoneNumber;
+    private long buyerId;
+    private long productId;
+    private String brand;
+    private int quantity;
+    private int price;
+
+
 }

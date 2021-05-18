@@ -3,7 +3,7 @@ package tech.itpark.manager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
-import tech.itpark.dto.Post;
+import tech.itpark.dto.PostDto;
 
 import java.util.List;
 import java.util.Map;
@@ -13,11 +13,11 @@ import java.util.Map;
 public class PostManager {
   private final NamedParameterJdbcTemplate jdbcTemplate;
 
-  public List<Post> getAll() {
+  public List<PostDto> getAll() {
     return jdbcTemplate.query(
         // language=SQL
         "SELECT id, content, media FROM posts",
-        (rs, rowNum) -> new Post(
+        (rs, rowNum) -> new PostDto(
             rs.getLong("id"),
             rs.getString("content"),
             rs.getString("media")
@@ -25,7 +25,7 @@ public class PostManager {
     );
   }
 
-  public void save(Post post) {
+  public void save(PostDto post) {
 
     jdbcTemplate.update(
 
