@@ -33,7 +33,6 @@ PUT http://localhost:8080/products/1
 Content-Type: application/json
 
 {
-  "id": 1,
   "model": "comfortable",
   "picture": "noavatar.jpg",
   "brand": "Forward Parma 28",

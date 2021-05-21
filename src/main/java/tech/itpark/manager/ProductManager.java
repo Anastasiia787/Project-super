@@ -20,14 +20,16 @@ public class ProductManager {
 
     public List<ProductDto> getAll() {
         return template.query(
-                "SELECT id, picture, model, brand, wheel_diameter, price, quantity, deleted FROM products ORDER BY id",
+                "SELECT id, picture, model, brand, wheel_diameter, price, quantity, deleted " +
+                        "FROM products ORDER BY id",
                 rowMapper
         );
     }
 
     public ProductDto getById(long id) {
         return template.queryForObject(
-                "SELECT id, picture, model, brand, wheel_diameter, price, quantity, deleted FROM products WHERE id = :id",
+                "SELECT id, picture, model, brand, wheel_diameter, price, quantity, deleted" +
+                        " FROM products WHERE id = :id",
                 Map.of("id", id),
                 rowMapper
         );
@@ -36,7 +38,8 @@ public class ProductManager {
     public ProductDto save(ProductDto dto) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(
-                "INSERT INTO products(picture, model, brand, wheel_diameter, price, quantity) VALUES (:picture, :model, :brand, :wheel_diameter, :price, :quantity)",
+                "INSERT INTO products(picture, model, brand, wheel_diameter, price, quantity)" +
+                        " VALUES (:picture, :model, :brand, :wheel_diameter, :price, :quantity)",
                 new MapSqlParameterSource(Map.of(
                         "picture", dto.getPicture(),
                         "model", dto.getModel(),
@@ -52,7 +55,9 @@ public class ProductManager {
 
     public ProductDto update(ProductDto dto) {
         template.update(
-                "UPDATE products SET picture = :picture, model = :model, brand = :brand, wheel_diameter = :wheel_diameter, price = :price, quantity = :quantity WHERE id = :id",
+                "UPDATE products " +
+                        "SET picture = :picture, model = :model, brand = :brand, wheel_diameter = :wheel_diameter, price = :price, quantity = :quantity " +
+                        "WHERE id = :id",
                 Map.of(
                         "id", dto.getId(),
                         "picture", dto.getPicture(),
@@ -63,7 +68,7 @@ public class ProductManager {
                         "quantity", dto.getQuantity()
                 )
         );
-        return getById(dto.getId());
+        return dto;
     }
 
     public List<ProductDto> search(String model) {

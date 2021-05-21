@@ -15,7 +15,6 @@ public class ProductController {
 
     private final ProductManager manager;
 
-
     @GetMapping
     public List<ProductDto> getAll() {
         return manager.getAll();
