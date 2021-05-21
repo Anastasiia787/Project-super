@@ -1,6 +1,7 @@
 CREATE TABLE products
 (
     id             INTEGER PRIMARY KEY AUTO_INCREMENT,
+    picture        TEXT    NOT NULL DEFAULT 'noavatar.jpg',
     model          TEXT    NOT NULL,
     brand          TEXT    NOT NULL,
     wheel_diameter INTEGER NOT NULL,

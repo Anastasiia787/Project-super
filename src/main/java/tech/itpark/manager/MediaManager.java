@@ -28,7 +28,7 @@ public class MediaManager {
             throw new RuntimeException(e);
         }
     }
-
+// ??? вот же все есть
     public MediaDto save(MultipartFile file) {
         try {
             String name = UUID.randomUUID().toString();

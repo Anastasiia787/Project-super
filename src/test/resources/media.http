@@ -21,10 +21,10 @@ POST http://localhost:8080/buyers
 Content-Type: application/json
 
 {
-  "buyerName": "o",
+  "name": "Tom",
   "avatar": "{{media_path}}",
-  "genderPerson": "w",
-  "year": 35,
-  "phoneNumber": "89376767034"
+  "gender": "man",
+  "age": 50,
+  "phoneNumber": "89175650304"
 }
 

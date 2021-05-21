@@ -6,11 +6,11 @@ GET http://localhost:8080/products/1
 
 ###
 
-GET http://localhost:8080/products/search?model=first
+GET http://localhost:8080/products/search?model=mountain
 
 ###
 
-GET http://localhost:8080/products/search?model=bicycle
+GET http://localhost:8080/products/search?model=child
 
 ###
 
@@ -18,10 +18,13 @@ POST http://localhost:8080/products
 Content-Type: application/json
 
 {
-  "model": "some item",
-  "price": 3000,
-  "quantity": 5,
-  "deleted": false
+  "id": 0,
+  "model": "child",
+  "picture": "noavatar.jpg",
+  "brand": "Novatrack Maple 16",
+  "wheelDiameter": 16,
+  "price": 9600,
+  "quantity": 5
 }
 
 ###
@@ -30,11 +33,13 @@ PUT http://localhost:8080/products/1
 Content-Type: application/json
 
 {
-  "id": "1",
-  "model": "bicycle",
-  "price": 2000,
-  "quantity": 7,
-  "deleted": false
+  "id": 1,
+  "model": "comfortable",
+  "picture": "noavatar.jpg",
+  "brand": "Forward Parma 28",
+  "wheelDiameter": 23,
+  "price": 17000,
+  "quantity": 10
 }
 
 ###
@@ -51,7 +56,12 @@ GET http://localhost:8080/buyers/1
 
 ###
 
-GET http://localhost:8080/buyers/4
+GET http://localhost:8080/buyers/6
+
+###
+
+GET http://localhost:8080/buyers/7
+
 
 ###
 
@@ -59,10 +69,11 @@ POST http://localhost:8080/buyers
 Content-Type: application/json
 
 {
-  "buyerName": "o",
-  "genderPerson": "w",
-  "year": 35,
-  "phoneNumber": "89376767034"
+  "name": "Anna",
+  "avatar": "noavatar.jpg",
+  "gender": "women",
+  "age": 36,
+  "phoneNumber": "89378780090"
 }
 
 ###
@@ -71,11 +82,12 @@ PUT http://localhost:8080/buyers
 Content-Type: application/json
 
 {
-  "buyerId": 1,
-  "buyerName": "updated",
-  "genderPerson": "m",
-  "year": 35,
-  "phoneNumber": "89376780035"
+  "id": 1,
+  "name": "John",
+  "avatar": "noavatar.jpg",
+  "gender": "man",
+  "age": 30,
+  "phoneNumber": "89370883234"
 }
 
 
