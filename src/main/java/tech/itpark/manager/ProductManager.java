@@ -11,6 +11,7 @@ import tech.itpark.mapper.ProductRowMapper;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -50,7 +51,8 @@ public class ProductManager {
                 )),
                 keyHolder
         );
-        return dto;
+        long id = Objects.requireNonNull(keyHolder.getKey()).longValue();
+        return getById(id);
     }
 
     public ProductDto update(ProductDto dto) {

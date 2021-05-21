@@ -36,7 +36,8 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ProductDto update(@RequestBody ProductDto dto) {
+    public ProductDto update(@PathVariable long id, @RequestBody ProductDto dto) {
+        dto.setId(id);
         return manager.update(dto);
     }
 
