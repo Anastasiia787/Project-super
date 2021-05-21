@@ -52,6 +52,7 @@ public class ProductManager {
                 keyHolder
         );
         long id = Objects.requireNonNull(keyHolder.getKey()).longValue();
+
         return getById(id);
     }
 
