@@ -1,20 +1,20 @@
-GET http://localhost:8080/products
+GET http://project-super.herokuapp.com/products
 
 ###
 
-GET http://localhost:8080/products/1
+GET http://project-super.herokuapp.com/products/1
 
 ###
 
-GET http://localhost:8080/products/search?model=mountain
+GET http://project-super.herokuapp.com/products/search?model=mountain
 
 ###
 
-GET http://localhost:8080/products/search?model=child
+GET http://project-super.herokuapp.com/products/search?model=child
 
 ###
 
-POST http://localhost:8080/products
+POST http://project-super.herokuapp.com/products
 Content-Type: application/json
 
 {
@@ -29,7 +29,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/products/1
+PUT http://project-super.herokuapp.com/products/1
 Content-Type: application/json
 
 {
@@ -43,28 +43,28 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/products/2
+DELETE http://project-super.herokuapp.com/products/2
 
 ###
 
-GET http://localhost:8080/buyers
+GET http://project-super.herokuapp.com/buyers
 
 ###
 
-GET http://localhost:8080/buyers/1
+GET http://project-super.herokuapp.com/buyers/1
 
 ###
 
-GET http://localhost:8080/buyers/6
+GET http://project-super.herokuapp.com/buyers/6
 
 ###
 
-GET http://localhost:8080/buyers/7
+GET http://project-super.herokuapp.com/buyers/7
 
 
 ###
 
-POST http://localhost:8080/buyers
+POST http://project-super.herokuapp.com/buyers
 Content-Type: application/json
 
 {
@@ -77,7 +77,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/buyers/1
+PUT http://project-super.herokuapp.com/buyers/1
 Content-Type: application/json
 
 {
@@ -90,15 +90,15 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/buyings
+GET http://project-super.herokuapp.com/buyings
 
 ###
 
-GET http://localhost:8080/buyings/1
+GET http://project-super.herokuapp.com/buyings/1
 
 ###
 
-POST http://localhost:8080/buyings
+POST http://project-super.herokuapp.com/buyings
 Content-Type: application/json
 
   {

@@ -1,4 +1,4 @@
-POST http://localhost:8080/media
+POST http://project-super.herokuapp.com/media
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
@@ -17,7 +17,7 @@ client.test("Request executed successfully", function() {
 
 ###
 
-POST http://localhost:8080/buyers
+POST http://project-super.herokuapp.com/buyers
 Content-Type: application/json
 
 {
