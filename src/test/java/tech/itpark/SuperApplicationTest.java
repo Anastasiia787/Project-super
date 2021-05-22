@@ -24,7 +24,7 @@ class SuperApplicationTest {
                 .andExpect(content().json("[\n" +
                         "  {\n" +
                         "    \"id\": 1,\n" +
-                        "    \"picture\": \"noavatar.jpg\",\n" +
+                        "    \"picture\": \"One.jpg\",\n" +
                         "    \"model\": \"comfortable\",\n" +
                         "    \"brand\": \"Forward Parma 28\",\n" +
                         "    \"wheelDiameter\": 19,\n" +
@@ -34,7 +34,7 @@ class SuperApplicationTest {
                         "  },\n" +
                         "  {\n" +
                         "    \"id\": 2,\n" +
-                        "    \"picture\": \"noavatar.jpg\",\n" +
+                        "    \"picture\": \"Two.jpg\",\n" +
                         "    \"model\": \"mountain\",\n" +
                         "    \"brand\": \"Cube Aim EX 29\",\n" +
                         "    \"wheelDiameter\": 23,\n" +
@@ -44,7 +44,7 @@ class SuperApplicationTest {
                         "  },\n" +
                         "  {\n" +
                         "    \"id\": 3,\n" +
-                        "    \"picture\": \"noavatar.jpg\",\n" +
+                        "    \"picture\": \"Three.jpg\",\n" +
                         "    \"model\": \"urban\",\n" +
                         "    \"brand\": \"Stark Terros 700 S\",\n" +
                         "    \"wheelDiameter\": 28,\n" +
@@ -57,7 +57,7 @@ class SuperApplicationTest {
         mockMvc.perform(get("/products/1"))
                 .andExpect(content().json(" {\n" +
                         "    \"id\": 1,\n" +
-                        "    \"picture\": \"noavatar.jpg\",\n" +
+                        "    \"picture\": \"One.jpg\",\n" +
                         "    \"model\": \"comfortable\",\n" +
                         "    \"brand\": \"Forward Parma 28\",\n" +
                         "    \"wheelDiameter\": 19,\n" +
@@ -70,7 +70,7 @@ class SuperApplicationTest {
                 .queryParam("model", "comfortable"))
                 .andExpect(content().json("[{\n" +
                         "    \"id\": 1,\n" +
-                        "    \"picture\": \"noavatar.jpg\",\n" +
+                        "    \"picture\": \"One.jpg\",\n" +
                         "    \"model\": \"comfortable\",\n" +
                         "    \"brand\": \"Forward Parma 28\",\n" +
                         "    \"wheelDiameter\": 19,\n" +
@@ -84,7 +84,7 @@ class SuperApplicationTest {
                 .content("{\n" +
                         "  \"id\": 0,\n" +
                         "  \"model\": \"child\",\n" +
-                        "  \"picture\": \"noavatar.jpg\",\n" +
+                        "  \"picture\": \"Four.jpg\",\n" +
                         "  \"brand\": \"Novatrack Maple 16\",\n" +
                         "  \"wheelDiameter\": 16,\n" +
                         "  \"price\": 9600,\n" +
@@ -93,7 +93,7 @@ class SuperApplicationTest {
                 .andExpect(content().json("{\n" +
                         "  \"id\": 4,\n" +
                         "  \"model\": \"child\",\n" +
-                        "  \"picture\": \"noavatar.jpg\",\n" +
+                        "  \"picture\": \"Four.jpg\",\n" +
                         "  \"brand\": \"Novatrack Maple 16\",\n" +
                         "  \"wheelDiameter\": 16,\n" +
                         "  \"price\": 9600,\n" +
@@ -104,7 +104,7 @@ class SuperApplicationTest {
                 .contentType("application/json")
                 .content("{\n" +
                         "  \"model\": \"comfortable\",\n" +
-                        "  \"picture\": \"noavatar.jpg\",\n" +
+                        "  \"picture\": \"One.jpg\",\n" +
                         "  \"brand\": \"Forward Parma 28\",\n" +
                         "  \"wheelDiameter\": 23,\n" +
                         "  \"price\": 17000,\n" +
@@ -112,7 +112,7 @@ class SuperApplicationTest {
                         "}"))
                 .andExpect(content().json("{\n" +
                         "  \"id\": 1,\n" +
-                        "  \"picture\": \"noavatar.jpg\",\n" +
+                        "  \"picture\": \"One.jpg\",\n" +
                         "  \"model\": \"comfortable\",\n" +
                         "  \"brand\": \"Forward Parma 28\",\n" +
                         "  \"wheelDiameter\": 23,\n" +

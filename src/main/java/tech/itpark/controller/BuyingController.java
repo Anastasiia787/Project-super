@@ -3,8 +3,11 @@ package tech.itpark.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tech.itpark.dto.BuyerDto;
 import tech.itpark.dto.BuyingDto;
 import tech.itpark.manager.BuyingManager;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/buyings")
@@ -12,9 +15,14 @@ import tech.itpark.manager.BuyingManager;
 public class BuyingController {
     private final BuyingManager manager;
 
+    @GetMapping
+    public List<BuyingDto> getAll() {
+        return manager.getAll();
+    }
+
     @GetMapping("/{id}")
-    public BuyingDto getByBuyingId(@PathVariable long id) {
-        return manager.getByBuyingId(id);
+    public BuyingDto getById(@PathVariable long id) {
+        return manager.getById(id);
     }
 
     @PostMapping()

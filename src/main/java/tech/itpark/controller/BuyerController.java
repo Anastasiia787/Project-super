@@ -6,15 +6,22 @@ import org.springframework.web.bind.annotation.*;
 import tech.itpark.dto.BuyerDto;
 import tech.itpark.manager.BuyerManager;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/buyers")
 @RequiredArgsConstructor
 public class BuyerController {
     private final BuyerManager manager;
 
+    @GetMapping
+    public List<BuyerDto> getAll() {
+        return manager.getAll();
+    }
+
     @GetMapping("/{id}")
-    public BuyerDto getByBuyerId(@PathVariable long id) {
-        return manager.getByBuyerId(id);
+    public BuyerDto getById(@PathVariable long id) {
+        return manager.getById(id);
     }
 
     @PostMapping()
@@ -22,8 +29,9 @@ public class BuyerController {
         return manager.save(dto);
     }
 
-    @PutMapping()
-    public BuyerDto update(@RequestBody BuyerDto dto) {
+    @PutMapping("/{id}")
+    public BuyerDto update(@PathVariable long id, @RequestBody BuyerDto dto) {
+        dto.setId(id);
         return manager.update(dto);
     }
 }

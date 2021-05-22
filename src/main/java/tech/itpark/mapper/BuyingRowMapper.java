@@ -10,8 +10,8 @@ public class BuyingRowMapper implements RowMapper<BuyingDto> {
     public BuyingDto mapRow(ResultSet rs, int rowNumb) throws SQLException {
         return new BuyingDto(
                 rs.getLong("id"),
-                rs.getLong("buyerId"),
-                rs.getLong("productId"),
+                rs.getLong("buyer_id"),
+                rs.getLong("product_id"),
                 rs.getString("brand"),
                 rs.getInt("quantity"),
                 rs.getInt("price")

@@ -15,6 +15,4 @@ public class BuyingDto {
     private String brand;
     private int quantity;
     private int price;
-
-
 }

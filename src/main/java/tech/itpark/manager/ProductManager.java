@@ -75,7 +75,8 @@ public class ProductManager {
 
     public List<ProductDto> search(String model) {
         return template.query(
-                "SELECT id, picture, model, brand, wheel_diameter, price, quantity, deleted FROM products WHERE model = :model",
+                "SELECT id, picture, model, brand, wheel_diameter, price, quantity, deleted " +
+                        "FROM products WHERE model = :model",
                 Map.of("model", model),
                 rowMapper
         );

@@ -10,7 +10,9 @@ import tech.itpark.dto.BuyerDto;
 import tech.itpark.mapper.BuyerRowMapper;
 
 
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -18,7 +20,15 @@ public class BuyerManager {
     private final NamedParameterJdbcTemplate template;
     private final BuyerRowMapper rowMapper = new BuyerRowMapper();
 
-    public BuyerDto getByBuyerId(long id) {
+    public List<BuyerDto> getAll() {
+        return template.query(
+                "SELECT id, name, avatar, gender, age, phone_number " +
+                        "FROM buyers ORDER BY id",
+                rowMapper
+        );
+    }
+
+    public BuyerDto getById(long id) {
         return template.queryForObject(
                 "SELECT id, name, avatar, gender, age, phone_number FROM buyers WHERE id = :id",
                 Map.of("id", id),
@@ -39,7 +49,8 @@ public class BuyerManager {
                 )),
                 keyHolder
         );
-        return dto;
+        long id = Objects.requireNonNull(keyHolder.getKey()).longValue();
+        return getById(id);
     }
 
     public BuyerDto update(BuyerDto dto) {
@@ -53,7 +64,6 @@ public class BuyerManager {
                         "phone_number", dto.getPhoneNumber()
                 )
         );
-        return getByBuyerId(dto.getId());
+        return dto;
     }
-
 }

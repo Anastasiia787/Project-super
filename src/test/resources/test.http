@@ -20,7 +20,7 @@ Content-Type: application/json
 {
   "id": 0,
   "model": "child",
-  "picture": "noavatar.jpg",
+  "picture": "Four.jpg",
   "brand": "Novatrack Maple 16",
   "wheelDiameter": 16,
   "price": 9600,
@@ -34,7 +34,7 @@ Content-Type: application/json
 
 {
   "model": "comfortable",
-  "picture": "noavatar.jpg",
+  "picture": "One.jpg",
   "brand": "Forward Parma 28",
   "wheelDiameter": 23,
   "price": 17000,
@@ -77,11 +77,10 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/buyers
+PUT http://localhost:8080/buyers/1
 Content-Type: application/json
 
 {
-  "id": 1,
   "name": "John",
   "avatar": "noavatar.jpg",
   "gender": "man",
@@ -89,6 +88,26 @@ Content-Type: application/json
   "phoneNumber": "89370883234"
 }
 
+###
+
+GET http://localhost:8080/buyings
+
+###
+
+GET http://localhost:8080/buyings/1
+
+###
+
+POST http://localhost:8080/buyings
+Content-Type: application/json
+
+  {
+    "buyerId": 2,
+    "productId": 3,
+    "brand": "Stark Terros 700 S",
+    "quantity": 1,
+    "price": 23690
+  }
 
 
 

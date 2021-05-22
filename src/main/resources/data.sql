@@ -1,7 +1,7 @@
-INSERT INTO products (id, model, brand, wheel_diameter, price, quantity)
-VALUES (1, 'comfortable', 'Forward Parma 28', 19, 17890, 15),
-       (2, 'mountain', 'Cube Aim EX 29', 23, 60100, 10),
-       (3, 'urban', 'Stark Terros 700 S', 28, 23690, 12);
+INSERT INTO products (id, picture, model, brand, wheel_diameter, price, quantity)
+VALUES (1, 'One.jpg', 'comfortable', 'Forward Parma 28', 19, 17890, 15),
+       (2, 'Two.jpg', 'mountain', 'Cube Aim EX 29', 23, 60100, 10),
+       (3, 'Three.jpg', 'urban', 'Stark Terros 700 S', 28, 23690, 12);
 
 INSERT INTO buyers (id, name, gender, age, phone_number)
 VALUES (1, 'John', 'man', 30, '89376780034'),
